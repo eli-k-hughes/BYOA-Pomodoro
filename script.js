@@ -136,17 +136,24 @@ updateDisplay();
 // Move theme toggle setup to after DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
+    console.log('Theme toggle element:', themeToggle); // Debug log
     
     // Theme toggle functionality
     themeToggle.addEventListener('click', () => {
+        console.log('Theme toggle clicked'); // Debug log
         document.body.classList.toggle('dark-mode');
+        console.log('Dark mode class:', document.body.classList.contains('dark-mode')); // Debug log
         themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
         localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        console.log('Theme saved:', localStorage.getItem('theme')); // Debug log
     });
 
     // Check saved preference on load
-    if (localStorage.getItem('theme') === 'dark' || 
-        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    console.log('Saved theme:', savedTheme, 'Prefers dark:', prefersDark); // Debug log
+
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
         document.body.classList.add('dark-mode');
         themeToggle.textContent = '☀️';
     }
