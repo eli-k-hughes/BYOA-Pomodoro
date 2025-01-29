@@ -11,7 +11,6 @@ const resetButton = document.getElementById('reset');
 const tooltip = document.getElementById('tooltip');
 const tooltipClose = document.querySelector('.tooltip-close');
 const intervalCounter = document.getElementById('interval-counter');
-const themeToggle = document.getElementById('theme-toggle');
 
 // Show tooltip on every page load
 setTimeout(() => {
@@ -134,16 +133,21 @@ updateButtonState();
 // Initialize display
 updateDisplay();
 
-// Add the theme toggle handler
-themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-});
+// Move theme toggle setup to after DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    // Theme toggle functionality
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+    });
 
-// Check saved preference
-if (localStorage.getItem('theme') === 'dark' || 
-    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.body.classList.add('dark-mode');
-    themeToggle.textContent = '☀️';
-} 
+    // Check saved preference on load
+    if (localStorage.getItem('theme') === 'dark' || 
+        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.body.classList.add('dark-mode');
+        themeToggle.textContent = '☀️';
+    }
+}); 
