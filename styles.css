@@ -6,8 +6,8 @@ body {
     min-height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
-    padding: 20px;  /* Add padding to prevent edge clipping */
-    box-sizing: border-box;  /* Include padding in width calculation */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .container {
@@ -20,13 +20,15 @@ body {
     flex-direction: column;
     align-items: center;
     transition: all 0.3s ease;
-    width: 100%;  /* Take full width */
-    max-width: 460px;  /* But limit maximum width */
-    position: relative;  /* For absolute positioning of theme toggle */
-    box-sizing: border-box;  /* Include padding in width calculation */
+    width: calc(100% - 40px);
+    max-width: 400px;
+    position: relative;
+    box-sizing: border-box;
 }
 
 #combo-button {
+    flex: 1;
+    min-width: 0; /* Allows button to shrink below its content size */
     font-size: 1.5rem;
     height: 120px;
     padding: 10px;
@@ -38,8 +40,6 @@ body {
     align-items: center;
     justify-content: space-between;
     transition: background-color 0.3s ease;
-    width: 100%;  /* Take full width of container */
-    max-width: 400px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -192,10 +192,11 @@ h1 {
     gap: 12px;
     opacity: 0;
     height: 0;
-    margin: -20px 0 0 0;
+    margin: -20px 16px 0 16px;
     transform: translateY(-10px);
     transition: all 0.3s ease;
-    width: 460px;
+    width: calc(100% - 32px);
+    max-width: 400px;
     overflow: hidden;
 }
 
@@ -238,14 +239,12 @@ h1 {
 }
 
 .button-container {
+    width: 100%;
     display: flex;
     align-items: center;
-    gap: 25px;
-    width: 100%;  /* Take full container width */
-    max-width: 460px;
     justify-content: space-between;
-    margin: 0;
-    padding: 0 10px;  /* Add some padding */
+    gap: 16px;
+    padding: 0;
     box-sizing: border-box;
 }
 
@@ -255,6 +254,7 @@ h1 {
     color: #333;
     min-width: 35px;
     text-align: left;
+    flex-shrink: 0; /* Prevent counter from shrinking */
 }
 
 .theme-toggle {
@@ -297,15 +297,44 @@ body.dark-mode .tooltip {
 }
 
 @media (max-width: 480px) {
+    body {
+        padding: 16px;
+    }
+
+    .container {
+        padding: 16px;
+        width: calc(100% - 32px);
+    }
+
+    .button-container {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .interval-counter {
+        margin-top: 8px;
+        text-align: center;
+    }
+
+    #combo-button {
+        width: 100%;
+    }
+
+    .tooltip {
+        width: calc(100% - 32px);
+    }
+
+    .timer {
+        font-size: 2rem; /* Slightly smaller on mobile */
+    }
+
+    .button-text {
+        width: 80px; /* Smaller emoji container on mobile */
+        height: 80px;
+    }
+
     .theme-toggle {
         top: 10px;  /* Reduce top margin on mobile */
         right: 10px;  /* Reduce right margin on mobile */
-    }
-    
-    .tooltip {
-        width: 100%;  /* Full width on mobile */
-        max-width: 460px;
-        padding: 12px;
-        box-sizing: border-box;
     }
 } 
