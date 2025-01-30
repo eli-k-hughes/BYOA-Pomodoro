@@ -6,6 +6,8 @@ body {
     min-height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
+    padding: 20px;  /* Add padding to prevent edge clipping */
+    box-sizing: border-box;  /* Include padding in width calculation */
 }
 
 .container {
@@ -18,6 +20,10 @@ body {
     flex-direction: column;
     align-items: center;
     transition: all 0.3s ease;
+    width: 100%;  /* Take full width */
+    max-width: 460px;  /* But limit maximum width */
+    position: relative;  /* For absolute positioning of theme toggle */
+    box-sizing: border-box;  /* Include padding in width calculation */
 }
 
 #combo-button {
@@ -32,7 +38,8 @@ body {
     align-items: center;
     justify-content: space-between;
     transition: background-color 0.3s ease;
-    width: 400px;
+    width: 100%;  /* Take full width of container */
+    max-width: 400px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -234,10 +241,12 @@ h1 {
     display: flex;
     align-items: center;
     gap: 25px;
-    width: 460px;
+    width: 100%;  /* Take full container width */
+    max-width: 460px;
     justify-content: space-between;
     margin: 0;
-    padding: 0;
+    padding: 0 10px;  /* Add some padding */
+    box-sizing: border-box;
 }
 
 .interval-counter {
@@ -285,4 +294,18 @@ body.dark-mode .interval-counter {
 
 body.dark-mode .tooltip {
     background-color: rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 480px) {
+    .theme-toggle {
+        top: 10px;  /* Reduce top margin on mobile */
+        right: 10px;  /* Reduce right margin on mobile */
+    }
+    
+    .tooltip {
+        width: 100%;  /* Full width on mobile */
+        max-width: 460px;
+        padding: 12px;
+        box-sizing: border-box;
+    }
 } 
