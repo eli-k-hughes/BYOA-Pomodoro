@@ -29,9 +29,14 @@ function hideTooltip() {
 function updateDisplay() {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
+    const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     
     minutesDisplay.textContent = minutes.toString().padStart(2, '0');
     secondsDisplay.textContent = seconds.toString().padStart(2, '0');
+    
+    // Update page title with current time and state
+    const stateEmoji = isWorkTime ? '🔥' : '☕️';
+    document.title = `${timeString} ${stateEmoji} 🍅 Pomodoro`;
 }
 
 function switchMode() {
