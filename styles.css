@@ -2,13 +2,12 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     min-height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
     padding: 20px;
     box-sizing: border-box;
-    padding-top: 60px;
     position: relative;
 }
 
@@ -309,7 +308,8 @@ body.dark-mode .tooltip {
 
 @media (max-width: 480px) {
     body {
-        padding-top: 50px;
+        padding: 20px;
+        align-items: center;
     }
 
     .container {
