@@ -46,15 +46,10 @@ function switchMode() {
 
 function updateButtonState() {
     comboButton.className = isWorkTime ? 'work' : 'rest';
-    const symbolSpan = comboButton.querySelector('.button-symbol');
+    comboButton.classList.toggle('playing', isPlaying);
     const textSpan = comboButton.querySelector('.button-text');
     
-    symbolSpan.textContent = isPlaying ? '⏸' : '▶';
-    
-    // Update the emoji based on mode (now using fire for work)
     textSpan.textContent = isWorkTime ? '🔥' : '☕️';
-    
-    // Update opacity based on play state
     textSpan.style.opacity = isPlaying ? '1' : '0.8';
 }
 

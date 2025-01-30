@@ -49,6 +49,28 @@ body {
     text-align: center;
 }
 
+.button-symbol svg {
+    width: 40px;
+    height: 40px;
+}
+
+.play-icon {
+    display: block;
+}
+
+.pause-icon {
+    display: none;
+}
+
+/* When playing, swap visibility */
+.playing .play-icon {
+    display: none;
+}
+
+.playing .pause-icon {
+    display: block;
+}
+
 .timer-container {
     flex: 1;
     text-align: center;
