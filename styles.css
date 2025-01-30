@@ -2,12 +2,14 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
     padding: 20px;
     box-sizing: border-box;
+    padding-top: 60px;
+    position: relative;
 }
 
 .container {
@@ -27,11 +29,14 @@ body {
 }
 
 #combo-button {
-    flex: 1;
-    min-width: 0; /* Allows button to shrink below its content size */
-    font-size: 1.5rem;
-    height: 120px;
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    position: relative;
     padding: 10px;
+    flex: 1;
+    min-width: 0;
+    font-size: 1.5rem;
     cursor: pointer;
     color: white;
     border: none;
@@ -45,15 +50,17 @@ body {
 }
 
 .button-symbol {
-    font-size: 3rem;
-    width: 100px;
-    height: 100px;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    text-align: center;
 }
 
 .button-symbol svg {
@@ -93,15 +100,18 @@ body {
 }
 
 .button-text {
-    font-size: 3rem;
-    width: 100px;
-    height: 100px;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    text-align: center;
+    font-size: 1.5rem;
 }
 
 h1 {
@@ -254,11 +264,11 @@ h1 {
     color: #333;
     min-width: 35px;
     text-align: left;
-    flex-shrink: 0; /* Prevent counter from shrinking */
+    flex-shrink: 0;
 }
 
 .theme-toggle {
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 20px;
     background: none;
@@ -268,6 +278,7 @@ h1 {
     padding: 8px;
     border-radius: 50%;
     transition: background-color 0.3s ease;
+    z-index: 1000;
 }
 
 .theme-toggle:hover {
@@ -298,7 +309,7 @@ body.dark-mode .tooltip {
 
 @media (max-width: 480px) {
     body {
-        padding: 16px;
+        padding-top: 50px;
     }
 
     .container {
@@ -312,29 +323,16 @@ body.dark-mode .tooltip {
     }
 
     .interval-counter {
-        margin-top: 8px;
+        margin-top: 12px;
         text-align: center;
     }
 
-    #combo-button {
-        width: 100%;
-    }
-
-    .tooltip {
-        width: calc(100% - 32px);
-    }
-
     .timer {
-        font-size: 2rem; /* Slightly smaller on mobile */
+        font-size: 2.2rem;
     }
 
-    .button-text {
-        width: 80px; /* Smaller emoji container on mobile */
-        height: 80px;
-    }
-
-    .theme-toggle {
-        top: 10px;  /* Reduce top margin on mobile */
-        right: 10px;  /* Reduce right margin on mobile */
+    .button-symbol svg {
+        width: 24px;
+        height: 24px;
     }
 } 
