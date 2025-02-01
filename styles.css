@@ -322,7 +322,7 @@ body.dark-mode .tooltip {
     }
 
     #combo-button {
-        padding: 12px;  /* Reduce overall button padding */
+        padding: 12px;  /* This creates equal spacing all around */
     }
 
     .timer-container {
@@ -330,13 +330,21 @@ body.dark-mode .tooltip {
     }
 
     .button-symbol {
-        width: 40px;  /* Smaller circles */
-        height: 40px;
+        width: 36px;  /* Slightly smaller circle */
+        height: 36px;
+        left: 12px;  /* Match button padding */
     }
 
     .button-text {
-        width: 40px;  /* Smaller circles */
-        height: 40px;
+        width: 36px;  /* Slightly smaller circle */
+        height: 36px;
+        right: 12px;  /* Match button padding */
+        font-size: 1.4rem;  /* Smaller emoji */
+    }
+
+    .button-symbol svg {
+        width: 20px;  /* Smaller play/pause icon */
+        height: 20px;
     }
 
     .tooltip {
