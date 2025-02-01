@@ -318,19 +318,25 @@ body.dark-mode .tooltip {
     }
 
     .timer {
-        font-size: 1.6rem;  /* Keep smaller timer text */
+        font-size: 1.6rem;
+    }
+
+    #combo-button {
+        padding: 12px;  /* Reduce overall button padding */
     }
 
     .timer-container {
-        padding: 0 25px;  /* More padding around the timer */
+        padding: 0 45px;  /* Increase padding to prevent overlap */
     }
 
     .button-symbol {
-        left: 15px;  /* Revert to original position */
+        width: 40px;  /* Smaller circles */
+        height: 40px;
     }
 
     .button-text {
-        right: 15px;  /* Revert to original position */
+        width: 40px;  /* Smaller circles */
+        height: 40px;
     }
 
     .tooltip {
