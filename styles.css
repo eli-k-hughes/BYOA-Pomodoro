@@ -318,7 +318,19 @@ body.dark-mode .tooltip {
     }
 
     .timer {
-        font-size: 1.8rem;  /* Smaller timer text */
+        font-size: 1.6rem;  /* Even smaller timer text */
+    }
+
+    .timer-container {
+        padding: 0 15px;  /* Add spacing between timer and icons */
+    }
+
+    .button-symbol {
+        left: 10px;  /* Adjust position for better spacing */
+    }
+
+    .button-text {
+        right: 10px;  /* Adjust position for better spacing */
     }
 
     .tooltip {
@@ -335,17 +347,6 @@ body.dark-mode .tooltip {
         font-size: 1.2rem;
         padding: 4px 8px;
         margin-left: auto;  /* Push to right */
-    }
-
-    .button-symbol {
-        width: 40px;
-        height: 40px;
-    }
-
-    .button-text {
-        width: 40px;
-        height: 40px;
-        font-size: 1.5rem;
     }
 
     .interval-counter {
