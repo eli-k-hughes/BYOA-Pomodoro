@@ -366,5 +366,41 @@ body.dark-mode .tooltip {
     .interval-counter {
         font-size: 2rem;
     }
-} 
+}
+
+.add-time-button {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: none;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.9rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.add-time-button.work {
+    color: #ff9800;
+}
+
+.add-time-button.rest {
+    color: #2196f3;
+}
+
+.add-time-button.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (max-width: 480px) {
+    .add-time-button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
 } 

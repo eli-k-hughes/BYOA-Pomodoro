@@ -11,6 +11,7 @@ const resetButton = document.getElementById('reset');
 const tooltip = document.getElementById('tooltip');
 const tooltipClose = document.querySelector('.tooltip-close');
 const intervalCounter = document.getElementById('interval-counter');
+const addTimeButton = document.getElementById('add-time');
 
 // Show tooltip on every page load
 setTimeout(() => {
@@ -37,6 +38,8 @@ function updateDisplay() {
     // Update page title with current time and state
     const stateEmoji = isWorkTime ? '🔥' : '☕️';
     document.title = `${timeString} ${stateEmoji} 🍅 Pomodoro`;
+
+    updateAddTimeButtonVisibility();
 }
 
 function switchMode() {
@@ -47,6 +50,7 @@ function switchMode() {
     timerId = null;
     updateDisplay();
     updateButtonState();
+    updateAddTimeButtonVisibility();
 }
 
 function updateButtonState() {
@@ -157,4 +161,20 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('dark-mode');
         themeToggle.textContent = '☀️';
     }
+});
+
+function updateAddTimeButtonVisibility() {
+    const halfTime = isWorkTime ? (25 * 60) / 2 : (5 * 60) / 2;
+    if (timeLeft <= halfTime) {
+        addTimeButton.classList.add('visible');
+        addTimeButton.classList.toggle('work', isWorkTime);
+        addTimeButton.classList.toggle('rest', !isWorkTime);
+    } else {
+        addTimeButton.classList.remove('visible');
+    }
+}
+
+addTimeButton.addEventListener('click', () => {
+    timeLeft += 5 * 60; // Add 5 minutes
+    updateDisplay();
 }); 
