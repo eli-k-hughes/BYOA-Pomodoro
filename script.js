@@ -171,6 +171,8 @@ function updateAddTimeButtonVisibility() {
         addTimeButton.classList.toggle('rest', !isWorkTime);
     } else {
         addTimeButton.classList.remove('visible');
+        addTimeButton.classList.remove('work');
+        addTimeButton.classList.remove('rest');
     }
 }
 

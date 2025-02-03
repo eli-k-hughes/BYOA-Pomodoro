@@ -370,37 +370,32 @@ body.dark-mode .tooltip {
 
 .add-time-button {
     position: absolute;
-    top: -30px;
+    bottom: -60px;  /* Position below container */
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(20px);  /* Initial position for animation */
     background: none;
     border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 12px 24px;
+    border-radius: 30px;
     font-family: 'Roboto Mono', monospace;
-    font-size: 0.9rem;
+    font-size: 2.4rem;
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.add-time-button.work {
-    color: #ff9800;
-}
-
-.add-time-button.rest {
-    color: #2196f3;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: auto;
 }
 
 .add-time-button.visible {
     opacity: 1;
     visibility: visible;
+    transform: translateX(-50%) translateY(0);  /* Final position */
 }
 
 @media (max-width: 480px) {
     .add-time-button {
-        font-size: 0.8rem;
-        padding: 6px 12px;
+        font-size: 1.8rem;
+        padding: 8px 20px;
+        bottom: -50px;
     }
 } 
