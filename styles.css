@@ -370,15 +370,16 @@ body.dark-mode .tooltip {
 
 .add-time-button {
     position: absolute;
-    bottom: -60px;  /* Position below container */
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);  /* Initial position for animation */
+    bottom: -70px;
+    /* Center based on timer div */
+    left: calc(50% - 35px); /* Adjust for interval counter */
+    transform: translateX(-50%) translateY(20px);
     background: none;
     border: none;
-    padding: 12px 24px;
-    border-radius: 30px;
+    padding: 10px 20px;
+    border-radius: 25px;
     font-family: 'Roboto Mono', monospace;
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
@@ -386,10 +387,18 @@ body.dark-mode .tooltip {
     width: auto;
 }
 
+.add-time-button.work {
+    color: #ff9800 !important;  /* Force color */
+}
+
+.add-time-button.rest {
+    color: #2196f3 !important;  /* Force color */
+}
+
 .add-time-button.visible {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);  /* Final position */
+    transform: translateX(-50%) translateY(0);
 }
 
 @media (max-width: 480px) {
@@ -398,4 +407,9 @@ body.dark-mode .tooltip {
         padding: 8px 20px;
         bottom: -50px;
     }
+}
+
+/* Add this to track interval counter width */
+:root {
+    --interval-counter-width: 40px;
 } 

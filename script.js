@@ -44,13 +44,13 @@ function updateDisplay() {
 
 function switchMode() {
     isWorkTime = !isWorkTime;
-    timeLeft = isWorkTime ? 25 * 60 : 5 * 60;
-    isPlaying = false;  // Ensure timer is paused when switching modes
+    timeLeft = isWorkTime ? 25 * 60 : 5 * 60; // 25 mins for work, 5 mins for rest
+    isPlaying = false;
     clearInterval(timerId);
     timerId = null;
     updateDisplay();
     updateButtonState();
-    updateAddTimeButtonVisibility();
+    addTimeButton.classList.remove('visible');
 }
 
 function updateButtonState() {
@@ -164,19 +164,26 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function updateAddTimeButtonVisibility() {
-    const halfTime = isWorkTime ? (25 * 60) / 2 : (5 * 60) / 2;
-    if (timeLeft <= halfTime) {
-        addTimeButton.classList.add('visible');
-        addTimeButton.classList.toggle('work', isWorkTime);
-        addTimeButton.classList.toggle('rest', !isWorkTime);
+    const halfTime = isWorkTime ? (25 * 60) / 2 : (5 * 60) / 2; // Half of 25 mins or 5 mins
+    
+    // Once visible, keep visible until timer ends or mode switches
+    if (!addTimeButton.classList.contains('visible')) {
+        // Initial visibility check
+        if (timeLeft <= halfTime && timeLeft > 0) {
+            addTimeButton.classList.add('visible');
+            addTimeButton.classList.toggle('work', isWorkTime);
+            addTimeButton.classList.toggle('rest', !isWorkTime);
+        }
     } else {
-        addTimeButton.classList.remove('visible');
-        addTimeButton.classList.remove('work');
-        addTimeButton.classList.remove('rest');
+        // Only remove visibility if timer ends or mode switches
+        if (timeLeft === 0) {
+            addTimeButton.classList.remove('visible');
+        }
     }
 }
 
 addTimeButton.addEventListener('click', () => {
     timeLeft += 5 * 60; // Add 5 minutes
     updateDisplay();
+    // Button stays visible regardless of new time
 }); 
