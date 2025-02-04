@@ -366,6 +366,12 @@ body.dark-mode .tooltip {
     .interval-counter {
         font-size: 2rem;
     }
+
+    .add-time-button {
+        font-size: 1.3rem;  /* Reduced by ~30% from 1.8rem */
+        padding: 6px 16px;  /* Slightly reduced padding */
+        bottom: -45px;  /* Adjusted for smaller size */
+    }
 }
 
 .add-time-button {
