@@ -22,7 +22,8 @@
 </head>
 <body>
     <div class="container">
-        <button id="theme-toggle" class="theme-toggle">🌙</button>
+        <button id="theme-toggle" class="theme-toggle">��</button>
+        <button id="settings-toggle" class="settings-toggle">⚙️</button>
         <div id="tooltip" class="tooltip">
             <span class="tooltip-text">
                 <span>🍅 Click to <strong>start/pause</strong> • Double-click to <strong>switch</strong></span>
@@ -51,6 +52,33 @@
         </div>
         <button id="reset" class="reset-button">Reset</button>
         <button id="add-time" class="add-time-button">+5 mins</button>
+    </div>
+    <div id="settings-modal" class="settings-modal">
+        <div class="settings-content">
+            <h2>Settings</h2>
+            <div class="settings-group">
+                <label>
+                    Work Duration (minutes):
+                    <input type="number" id="work-duration" min="1" max="99" value="25">
+                </label>
+                <label>
+                    Rest Duration (minutes):
+                    <input type="number" id="rest-duration" min="1" max="99" value="5">
+                </label>
+                <label class="switch-label">
+                    <span id="add-time-label">Show +5 mins button</span>
+                    <div class="switch">
+                        <input type="checkbox" id="show-add-time" checked>
+                        <span class="slider"></span>
+                    </div>
+                </label>
+            </div>
+            <div class="settings-buttons">
+                <button id="settings-default" class="settings-button">Reset to Default</button>
+                <button id="settings-save" class="settings-button primary">Save</button>
+            </div>
+            <button class="settings-close">×</button>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>

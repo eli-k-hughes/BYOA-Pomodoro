@@ -12,6 +12,15 @@ const tooltip = document.getElementById('tooltip');
 const tooltipClose = document.querySelector('.tooltip-close');
 const intervalCounter = document.getElementById('interval-counter');
 const addTimeButton = document.getElementById('add-time');
+const settingsToggle = document.getElementById('settings-toggle');
+const settingsModal = document.getElementById('settings-modal');
+const settingsClose = document.querySelector('.settings-close');
+const settingsDefault = document.getElementById('settings-default');
+const settingsSave = document.getElementById('settings-save');
+const workDurationInput = document.getElementById('work-duration');
+const restDurationInput = document.getElementById('rest-duration');
+const showAddTimeSwitch = document.getElementById('show-add-time');
+const addTimeLabel = document.getElementById('add-time-label');
 
 // Show tooltip on every page load
 setTimeout(() => {
@@ -44,7 +53,9 @@ function updateDisplay() {
 
 function switchMode() {
     isWorkTime = !isWorkTime;
-    timeLeft = isWorkTime ? 25 * 60 : 5 * 60; // 25 mins for work, 5 mins for rest
+    const workDuration = parseInt(localStorage.getItem('workDuration')) || 25;
+    const restDuration = parseInt(localStorage.getItem('restDuration')) || 5;
+    timeLeft = isWorkTime ? workDuration * 60 : restDuration * 60;
     isPlaying = false;
     clearInterval(timerId);
     timerId = null;
@@ -164,26 +175,87 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function updateAddTimeButtonVisibility() {
-    const halfTime = isWorkTime ? (25 * 60) / 2 : (5 * 60) / 2; // Half of 25 mins or 5 mins
+    // Check if feature is enabled
+    if (localStorage.getItem('showAddTime') === 'false') {
+        addTimeButton.classList.remove('visible');
+        return;
+    }
+
+    const halfTime = isWorkTime ? (25 * 60) / 2 : (5 * 60) / 2;
     
-    // Once visible, keep visible until timer ends or mode switches
     if (!addTimeButton.classList.contains('visible')) {
-        // Initial visibility check
         if (timeLeft <= halfTime && timeLeft > 0) {
             addTimeButton.classList.add('visible');
             addTimeButton.classList.toggle('work', isWorkTime);
             addTimeButton.classList.toggle('rest', !isWorkTime);
         }
     } else {
-        // Only remove visibility if timer ends or mode switches
         if (timeLeft === 0) {
             addTimeButton.classList.remove('visible');
         }
     }
 }
 
-addTimeButton.addEventListener('click', () => {
-    timeLeft += 5 * 60; // Add 5 minutes
+function handleAddTime() {
+    const addTimeButton = document.getElementById('add-time');
+    addTimeButton.classList.add('time-added');
+    
+    // Remove the class after animation completes
+    setTimeout(() => {
+        addTimeButton.classList.remove('time-added');
+    }, 400);
+    
+    // Add the time (existing functionality)
+    timeLeft += 5 * 60;
     updateDisplay();
-    // Button stays visible regardless of new time
+}
+
+// Update the event listener
+document.getElementById('add-time').addEventListener('click', handleAddTime);
+
+// Add these event listeners with other initialization code
+settingsToggle.addEventListener('click', () => {
+    settingsModal.classList.add('show');
+    workDurationInput.value = localStorage.getItem('workDuration') || '25';
+    restDurationInput.value = localStorage.getItem('restDuration') || '5';
+    showAddTimeSwitch.checked = localStorage.getItem('showAddTime') !== 'false';
+    addTimeLabel.textContent = showAddTimeSwitch.checked ? 
+        'Show +5 mins button' : 
+        'Hide +5 mins button';
+});
+
+settingsClose.addEventListener('click', () => {
+    settingsModal.classList.remove('show');
+});
+
+settingsDefault.addEventListener('click', () => {
+    workDurationInput.value = '25';
+    restDurationInput.value = '5';
+    showAddTimeSwitch.checked = true;
+});
+
+settingsSave.addEventListener('click', () => {
+    const workDuration = Math.min(99, Math.max(1, parseInt(workDurationInput.value) || 25));
+    const restDuration = Math.min(99, Math.max(1, parseInt(restDurationInput.value) || 5));
+    
+    localStorage.setItem('workDuration', workDuration.toString());
+    localStorage.setItem('restDuration', restDuration.toString());
+    localStorage.setItem('showAddTime', showAddTimeSwitch.checked);
+    
+    // Update current timer if needed
+    if (isWorkTime) {
+        timeLeft = workDuration * 60;
+    } else {
+        timeLeft = restDuration * 60;
+    }
+    
+    updateDisplay();
+    settingsModal.classList.remove('show');
+});
+
+// Update the label when switch changes
+showAddTimeSwitch.addEventListener('change', () => {
+    addTimeLabel.textContent = showAddTimeSwitch.checked ? 
+        'Show +5 mins button' : 
+        'Hide +5 mins button';
 }); 
